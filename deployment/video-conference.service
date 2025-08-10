@@ -1,0 +1,51 @@
+[Unit]
+Description=Video Conference Application
+Documentation=https://github.com/your-username/video-conference-app
+After=network.target mongod.service
+Wants=mongod.service
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=videoapp
+Group=videoapp
+WorkingDirectory=/opt/video-conference-app/server
+ExecStart=/usr/bin/node server.js
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=10
+StartLimitBurst=3
+
+# Environment variables
+Environment=NODE_ENV=production
+Environment=PORT=5000
+Environment=HOST=0.0.0.0
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/video-conference-app/server/uploads /opt/video-conference-app/server/logs
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+
+# Resource limits
+LimitNOFILE=65536
+LimitNPROC=4096
+MemoryMax=2G
+CPUQuota=200%
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=video-conference
+
+# Health check
+ExecStartPre=/bin/bash -c 'until curl -f http://localhost:5000/api/health; do sleep 2; done'
+
+[Install]
+WantedBy=multi-user.target
