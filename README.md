@@ -1,94 +1,353 @@
-<header>
+# Real-Time Communication App
 
-<!--
-  <<< Author notes: Course header >>>
-  Read <https://skills.github.com/quickstart> for more information about how to build courses using this template.
-  Include a 1280×640 image, course name in sentence case, and a concise description in emphasis.
-  In your repository settings: enable template repository, add your 1280×640 social image, auto delete head branches.
-  Next to "About", add description & tags; disable releases, packages, & environments.
-  Add your open source license, GitHub uses the MIT license.
--->
+A comprehensive video conferencing and collaboration platform built with modern web technologies, featuring WebRTC for real-time media, Socket.io for instant communication, and end-to-end encryption for security.
 
-# Code with GitHub Copilot
+## 🚀 Features
 
-_GitHub Copilot can help you code by offering autocomplete-style suggestions right in VS Code and Codespaces._
+### Core Communication
+- **HD Video Calling**: Multi-user video conferencing with WebRTC
+- **Audio Communication**: High-quality audio with noise suppression
+- **Screen Sharing**: Share your screen with other participants
+- **Real-time Chat**: Instant messaging with typing indicators
+- **File Sharing**: Secure file upload and download with encryption
+- **Collaborative Whiteboard**: Draw and collaborate in real-time
 
-</header>
+### Security & Authentication
+- **User Authentication**: Secure JWT-based authentication
+- **End-to-End Encryption**: AES encryption for messages and data
+- **Secure File Handling**: Protected file upload and storage
+- **Rate Limiting**: Protection against abuse and spam
+- **Input Validation**: Comprehensive data validation
 
-<!--
-  <<< Author notes: Step 1 >>>
-  Choose 3-5 steps for your course.
-  The first step is always the hardest, so pick something easy!
-  Link to docs.github.com for further explanations.
-  Encourage users to open new tabs for steps!
--->
+### User Experience
+- **Modern UI/UX**: Beautiful, responsive design with Tailwind CSS
+- **Smooth Animations**: Framer Motion animations throughout
+- **Real-time Updates**: Live participant status and notifications
+- **Mobile Responsive**: Works on desktop, tablet, and mobile
+- **Intuitive Controls**: Easy-to-use interface for all features
 
-## Step 1: Leverage Codespaces with VS Code for Copilot
+## 🛠 Tech Stack
 
-_Welcome to "Develop With AI Powered Code Suggestions Using GitHub Copilot and VS Code"! :wave:_
+### Frontend
+- **React 18**: Modern React with hooks and context
+- **Vite**: Fast build tool and development server
+- **Tailwind CSS**: Utility-first CSS framework
+- **Framer Motion**: Smooth animations and transitions
+- **Socket.io Client**: Real-time communication
+- **Fabric.js**: Canvas manipulation for whiteboard
+- **React Router**: Client-side routing
+- **Axios**: HTTP client for API calls
+- **React Hot Toast**: Beautiful notification system
 
-GitHub Copilot is an AI pair programmer that helps you write code faster and with less work. It draws context from comments and code to suggest individual lines and whole functions instantly. GitHub Copilot is powered by OpenAI Codex, a generative pretrained language model created by OpenAI.
+### Backend
+- **Node.js**: JavaScript runtime
+- **Express.js**: Web application framework
+- **Socket.io**: Real-time bidirectional communication
+- **MongoDB**: NoSQL database with Mongoose ODM
+- **JWT**: JSON Web Tokens for authentication
+- **Bcrypt**: Password hashing
+- **Multer**: File upload handling
+- **Helmet**: Security middleware
+- **CORS**: Cross-origin resource sharing
 
-**Copilot works with many code editors including VS Code, Visual Studio, JetBrains IDE, and Neovim.**
+### Real-Time Communication
+- **WebRTC**: Peer-to-peer video/audio communication
+- **STUN Servers**: NAT traversal for WebRTC
+- **Socket.io**: Signaling server for WebRTC
 
-Additionally, GitHub Copilot is trained on all languages that appear in public repositories. For each language, the quality of suggestions you receive may depend on the volume and diversity of training data for that language.
+## 📦 Installation
 
-Using Copilot inside a Codespace shows just how easy it is to get up and running with GitHub's suite of [Collaborative Coding](https://github.com/features#features-collaboration) tools.
+### Prerequisites
+- Node.js (v16 or higher)
+- MongoDB (local or cloud instance)
+- npm or yarn package manager
 
-> **Note**
-> This skills exercise will focus on leveraging GitHub Codespace. It is recommended that you complete the GitHub skill, [Codespaces](https://github.com/skills/code-with-codespaces), before moving forward with this exercise.
+### Setup Instructions
 
-### :keyboard: Activity: Enable Copilot inside a Codespace
-
-**We recommend opening another browser tab to work through the following activities so you can keep these instructions open for reference.**
-
-Before you open up a codespace on a repository, you can create a development container and define specific extensions or configurations that will be used or installed in your codespace. Let's create this development container and add copilot to the list of extensions.
-
-1. Navigating back to your **Code** tab of your repository, click the **Add file** drop-down button, and then click `Create new file`.
-1. Type or paste the following in the empty text field prompt to name your file.
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd realtime-communication-app
    ```
-   .devcontainer/devcontainer.json
+
+2. **Install dependencies**
+   ```bash
+   # Install root dependencies
+   npm install
+   
+   # Install all dependencies (root, server, client)
+   npm run install-all
    ```
-1. In the body of the new **.devcontainer/devcontainer.json** file, add the following content:
+
+3. **Environment Configuration**
+   
+   Create environment files:
+   
+   **Server (.env in /server directory):**
+   ```env
+   PORT=5000
+   JWT_SECRET=your_very_long_and_secure_jwt_secret_key_here
+   MONGODB_URI=mongodb://localhost:27017/rtc_app
+   CORS_ORIGIN=http://localhost:5173
+   ENCRYPTION_KEY=your_32_character_encryption_key!!
+   FILE_UPLOAD_PATH=./uploads
+   MAX_FILE_SIZE=50000000
    ```
-   {
-       // Name this configuration
-       "name": "Codespace for Skills!",
-       "customizations": {
-           "vscode": {
-               "extensions": [
-                   "GitHub.copilot"
-               ]
-           }
-       }
-   }
+
+4. **Start MongoDB**
+   ```bash
+   # If using local MongoDB
+   mongod
+   
+   # Or use MongoDB Atlas (cloud) - update MONGODB_URI accordingly
    ```
-1. Select the option to **Commit directly to the `main` branch**, and then click the **Commit new file** button.
-1. Navigate back to the home page of your repository by clicking the **Code** tab located at the top left of the screen.
-1. Click the **Code** button located in the middle of the page.
-1. Click the **Codespaces** tab on the box that pops up.
-1. Click the **Create codespace on main** button.
 
-   **Wait about 2 minutes for the codespace to spin itself up.**
+5. **Run the application**
+   
+   **Development mode (both server and client):**
+   ```bash
+   npm run dev
+   ```
+   
+   **Or run separately:**
+   ```bash
+   # Terminal 1 - Server
+   npm run server
+   
+   # Terminal 2 - Client
+   npm run client
+   ```
 
-1. Verify your codespace is running. The browser should contain a VS Code web-based editor and a terminal should be present such as the below:
-   ![Screen Shot 2023-03-09 at 9 09 07 AM](https://user-images.githubusercontent.com/26442605/224102962-d0222578-3f10-4566-856d-8d59f28fcf2e.png)
-1. The `copilot` extension should show up in the VS Code extension list. Click the extensions sidebar tab. You should see the following:
-   ![Screen Shot 2023-03-09 at 9 04 13 AM](https://user-images.githubusercontent.com/26442605/224102514-7d6d2f51-f435-401d-a529-7bae3ae3e511.png)
+6. **Access the application**
+   - Frontend: http://localhost:5173
+   - Backend API: http://localhost:5000
 
-**Wait about 60 seconds then refresh your repository landing page for the next step.**
+## 🎯 Usage
 
-<footer>
+### Getting Started
 
-<!--
-  <<< Author notes: Footer >>>
-  Add a link to get support, GitHub status page, code of conduct, license link.
--->
+1. **Create Account**: Register with username, email, and password
+2. **Login**: Sign in with your credentials
+3. **Create Room**: Generate a new room ID or enter an existing one
+4. **Join Meeting**: Share room ID with others to join the call
+
+### Features Guide
+
+#### Video Calling
+- Click camera icon to toggle video on/off
+- Click microphone icon to mute/unmute audio
+- Use screen share button to share your screen
+- View all participants in a responsive grid layout
+
+#### Chat
+- Switch to chat tab in the sidebar
+- Type messages and press Enter to send
+- See typing indicators when others are typing
+- All messages are encrypted for privacy
+
+#### Whiteboard
+- Switch to whiteboard tab
+- Choose from drawing tools: pen, eraser, shapes, text
+- Select colors and brush sizes
+- Collaborate in real-time with other participants
+- Download whiteboard as PNG image
+
+#### File Sharing
+- Switch to files tab
+- Drag and drop files or click to upload
+- Supported formats: images, documents, audio, video, archives
+- Files are encrypted before upload
+- Download shared files securely
+
+## 🏗 Project Structure
+
+```
+realtime-communication-app/
+├── client/                 # React frontend
+│   ├── public/            # Static assets
+│   ├── src/
+│   │   ├── components/    # Reusable UI components
+│   │   ├── context/       # React context providers
+│   │   ├── hooks/         # Custom React hooks
+│   │   ├── pages/         # Page components
+│   │   ├── services/      # API services
+│   │   └── utils/         # Utility functions
+│   ├── package.json
+│   └── vite.config.js
+├── server/                # Node.js backend
+│   ├── middleware/        # Express middleware
+│   ├── models/           # MongoDB models
+│   ├── routes/           # API routes
+│   ├── uploads/          # File storage
+│   └── index.js          # Server entry point
+├── package.json          # Root package.json
+└── README.md
+```
+
+## 🔧 Configuration
+
+### WebRTC Configuration
+The app uses Google's STUN servers by default. For production, consider:
+- Adding TURN servers for better connectivity
+- Implementing ICE candidate gathering optimization
+- Adding bandwidth adaptation
+
+### Security Configuration
+- Change JWT_SECRET to a secure random string
+- Use strong ENCRYPTION_KEY (32 characters)
+- Configure CORS_ORIGIN for production domain
+- Enable HTTPS in production
+
+### File Upload Configuration
+- Adjust MAX_FILE_SIZE as needed
+- Configure FILE_UPLOAD_PATH for your storage
+- Add virus scanning for uploaded files in production
+
+## 🚀 Deployment
+
+### Production Considerations
+
+1. **Environment Variables**
+   - Use production MongoDB URI
+   - Set secure JWT secret
+   - Configure proper CORS origins
+   - Use HTTPS for WebRTC
+
+2. **Performance**
+   - Enable gzip compression
+   - Use CDN for static assets
+   - Implement caching strategies
+   - Monitor server resources
+
+3. **Security**
+   - Enable HTTPS/SSL
+   - Use environment-specific secrets
+   - Implement proper rate limiting
+   - Regular security audits
+
+### Deployment Platforms
+- **Frontend**: Vercel, Netlify, AWS S3 + CloudFront
+- **Backend**: Railway, Heroku, AWS EC2, DigitalOcean
+- **Database**: MongoDB Atlas, AWS DocumentDB
+
+## 🧪 Development
+
+### Available Scripts
+
+```bash
+# Root level
+npm run dev          # Start both server and client
+npm run install-all  # Install all dependencies
+npm run server       # Start server only
+npm run client       # Start client only
+
+# Server
+cd server
+npm start           # Production server
+npm run dev         # Development server with nodemon
+
+# Client
+cd client
+npm run dev         # Development server
+npm run build       # Production build
+npm run preview     # Preview production build
+```
+
+### Code Style
+- ESLint for code linting
+- Prettier for code formatting
+- Consistent naming conventions
+- Component-based architecture
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 API Documentation
+
+### Authentication Endpoints
+- `POST /api/auth/register` - User registration
+- `POST /api/auth/login` - User login
+- `GET /api/auth/me` - Get current user
+- `POST /api/auth/logout` - User logout
+- `PATCH /api/auth/profile` - Update profile
+
+### File Endpoints
+- `POST /api/files/upload` - Upload file
+- `GET /api/files/:fileId/download` - Download file
+- `GET /api/files/:fileId/info` - Get file info
+- `DELETE /api/files/:fileId` - Delete file
+
+### WebSocket Events
+- `join-room` - Join a video call room
+- `offer/answer/ice-candidate` - WebRTC signaling
+- `chat-message` - Send chat message
+- `whiteboard-draw` - Whiteboard drawing events
+- `file-share` - File sharing events
+
+## 🔐 Security Features
+
+### Data Encryption
+- AES encryption for chat messages
+- File metadata encryption
+- Secure key exchange simulation
+- Data integrity verification
+
+### Authentication Security
+- JWT tokens with expiration
+- Password hashing with bcrypt
+- Rate limiting on authentication endpoints
+- Input validation and sanitization
+
+### Communication Security
+- WebRTC peer-to-peer encryption
+- Socket.io connection security
+- CORS protection
+- Helmet security headers
+
+## 📱 Browser Support
+
+- Chrome 88+ (recommended)
+- Firefox 85+
+- Safari 14+
+- Edge 88+
+
+**Note**: WebRTC features require HTTPS in production and may not work in older browsers.
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **WebRTC Connection Failed**
+   - Check firewall settings
+   - Ensure HTTPS in production
+   - Verify STUN/TURN server configuration
+
+2. **File Upload Issues**
+   - Check file size limits
+   - Verify upload directory permissions
+   - Ensure proper MIME type configuration
+
+3. **Database Connection**
+   - Verify MongoDB is running
+   - Check connection string format
+   - Ensure network connectivity
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🎉 Acknowledgments
+
+- WebRTC community for excellent documentation
+- Socket.io team for real-time communication
+- React team for the amazing framework
+- All contributors and users of this project
 
 ---
 
-Get help: [Post in our discussion board](https://github.com/orgs/skills/discussions/categories/code-with-copilot) &bull; [Review the GitHub status page](https://www.githubstatus.com/)
-
-&copy; 2023 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
-
-</footer>
+Built with ❤️ using modern web technologies for seamless real-time communication and collaboration.
